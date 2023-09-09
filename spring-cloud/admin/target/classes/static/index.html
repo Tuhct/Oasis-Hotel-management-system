@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+  <!-- 页面meta -->
+
+  <meta charset="utf-8">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>酒店管理系统入口</title>
+
+  <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+
+  <!-- 引入样式 -->
+
+  <link rel="stylesheet" href="../plugins/elementui/index.css">
+
+  <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body class="hold-transition">
+
+<div id="app">
+
+  <el-row>
+    <el-button type="primary" @click="employee()">雇员入口</el-button>
+    <el-button type="primary" @click="admin()">管理员入口</el-button>
+    <el-button type="primary" @click="user()">用户入口</el-button>
+
+  </el-row>
+
+</div>
+
+</body>
+
+<!-- 引入组件库 -->
+
+<script src="../js/vue.js"></script>
+
+<script src="../plugins/elementui/index.js"></script>
+
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+
+<script src="../js/axios-0.18.0.js"></script>
+
+<script>
+  var vue = new Vue({
+
+    el: '#app',
+    methods: {
+      employee(){
+          window.location.href="http://localhost:8081/gyjm";
+      },
+      admin(){
+          window.location.href="http://localhost:8080/pages/main.html";
+      },
+      user(){
+        window.location.href="http://localhost:8081/yhjm";
+      }
+    }
+  })
+
+</script>
+
+</html>

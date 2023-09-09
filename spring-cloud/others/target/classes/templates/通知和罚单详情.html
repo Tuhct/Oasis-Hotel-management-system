@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>详情</title>
+    <link rel="stylesheet" type="text/css" href="CSS/详情样式.css">
+    <style>
+        #table{
+            height: 600px;
+            width: 600px;
+            position: absolute;
+            top:30px;
+            left:200px;
+        }
+
+
+        #table td, table th
+        {
+            border: 1px solid #cad9ea;
+            color: #666;
+            height: 30px;
+        }
+        #table thead th
+        {
+            background-color: #CCE8EB;
+            width: 100px;
+        }
+        #table tr:nth-child(odd)
+        {
+            background: #fff;
+        }
+        #table tr:nth-child(even)
+        {
+            background: #F5FAFA;
+        }
+        #button{
+            width: 90px;
+            height: 50px;
+            position: absolute;
+            top:5px;
+            right: 5px;
+
+        }
+    </style>
+</head>
+<body>
+<table id="table" th:each="show:${show}">
+    <tr>
+        <th colspan="3">您的邮件请收好</th>
+    </tr>
+    <tr>
+        <th>邮件编号</th>
+        <th colspan="2" th:text="${show.getId()}"></th>
+    </tr>
+    <tr>
+        <th>客户邮箱</th>
+        <th colspan="2" th:text="${show.getC_email()}"></th>
+    </tr>
+    <tr style="height: 100px;">
+        <th>邮件内容</th>
+        <th colspan="2" th:text="${show.getMessage()}"></th>
+    </tr>
+    <tr>
+        <th>请选择支付方式</th>
+        <th><a href="/wxfkm">微信</a></th>
+        <th><a href="/zfbfkm">支付宝</a></th>
+    </tr>
+
+</table>
+<input type="button" id="button" name="back" value="返回"onClick="javascript:history.back()">
+</body>
+</html>

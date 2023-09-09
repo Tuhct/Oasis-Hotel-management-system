@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springbootdemo.mapper.arriveMapper" >
+    <insert id="addarr">
+        INSERT INTO arrive values (#{client_name},#{room_id},#{arrive_date},#{book_type},#{depart})
+    </insert>
+    <delete id="deletearr">
+        delete from arrive where client_name=#{client_name} AND room_id=#{room_id} AND arrive_date=#{arrive_date}
+    </delete>
+    <update id="updatearr">
+        update arrive
+        set
+        book_type=#{book_type},
+        depart=#{depart}
+        where client_name=#{client_name}
+        and room_id=#{room_id}
+        and arrive_date=#{arrive_date}
+    </update>
+    <select id="selectarr" resultType="com.example.springbootdemo.bean.arrive">
+        SELECT *
+        FROM arrive
+        WHERE
+<!--        (arrive_date = #{arrive_date} OR #{arrive_date}= "") AND -->
+        (client_name = #{client_name}  OR #{client_name}= "")
+        AND (book_type = #{book_type} OR #{book_type}= "")
+<!--        AND (depart = #{depart} OR #{depart}= "")-->
+        AND (room_id = #{room_id} OR #{room_id}= "")
+        order by client_name
+    </select>
+</mapper>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>每日到达</title>
+    <link rel="stylesheet" type="text/css" href="CSS/CSS管理.css">
+</head>
+<body>
+
+<div id="main">
+    <div id="deal">
+        <form method="post" action="mrdd">
+            <table>
+<!--                <tr>-->
+<!--                    <td>编号:</td><td><input type="text" name="id" style="width:200px" /></td>-->
+<!--                </tr>-->
+                <tr>
+                    <td>客户姓名:</td><td><input type="text" name="client_name" style="width:200px"/></td>
+                </tr>
+                <tr>
+                    <td>房间编号:</td><td><input type="text" name="room_id" style="width:200px"/></td>
+                </tr>
+                <tr>
+                    <td>到达时间:</td><td><input type="text" name="arrive_date" style="width:200px" /></td>
+                </tr>
+                <tr>
+                    <td>预定类型:</td><td><input type="text" name="book_type" style="width:200px"/></td>
+                </tr>
+                <tr>
+                    <td>离开时间:</td><td><input type="text" name="depart" style="width:200px"/></td>
+                </tr>
+
+
+                <tr>
+                    <td>
+                        <input type="submit" value="增加" name="deal" onclick="return logout()"/>
+                        <input type="submit" value="删除" name="deal" onclick="return logout1()"/>
+                        <input type="submit" value="修改" name="deal" onclick="return logout2()"/>
+                        <input type="submit" value="查询" name="deal"/>
+                    </td>
+                    <td>
+                        <input type="reset" value="重置" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div id="show">
+        <table id="table">
+            <h3 th:utext="${Result}">操作结果</h3>
+
+            <tr th:each="arriveList:${arriveList}">
+<!--                <th th:text="${arriveList.getId()}"></th>-->
+                <th th:text="${arriveList.getClient_name()}"></th>
+                <th th:text="${arriveList.getRoom_id()}"></th>
+                <th th:text="${arriveList.getArrive_date()}"></th>
+                <th th:text="${arriveList.getBook_type()}"></th>
+                <th th:text="${arriveList.getDepart()}"></th>
+
+
+            </tr>
+
+        </table>
+    </div>
+
+</div>
+<script>
+    function logout() {
+        if (window.confirm('确认增加?')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function logout1() {
+        if (window.confirm('确认删除?')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function logout2() {
+        if (window.confirm('确认修改?')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+
+</body>
+</html>

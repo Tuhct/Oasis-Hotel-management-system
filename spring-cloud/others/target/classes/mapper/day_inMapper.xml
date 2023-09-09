@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springbootdemo.mapper.day_inMapper" >
+    <insert id="addday">
+        INSERT INTO day_in values (#{room_id},#{client_name},#{depart})
+    </insert>
+    <delete id="deleteday">
+        delete from day_in where room_id=#{room_id}
+    </delete>
+    <update id="updateday">
+        update day_in
+        set
+        client_name=#{client_name},
+        depart=#{depart}
+        where room_id=#{room_id}
+    </update>
+    <select id="selectday" resultType="com.example.springbootdemo.bean.day_in">
+        SELECT *
+        FROM day_in
+        WHERE
+        (room_id = #{room_id}  OR #{room_id}= "")
+        AND (client_name = #{client_name} OR #{client_name}= "")
+<!--        AND (depart = #{depart} OR #{depart}= "")-->
+        order by room_id
+    </select>
+</mapper>

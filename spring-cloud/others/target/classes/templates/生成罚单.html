@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>生成罚单</title>
+    <link rel="stylesheet" type="text/css" href="CSS/CSS管理.css">
+</head>
+<body>
+
+<div id="main">
+    <div id="deal">
+        <form method="post" action="scfd">
+            <table>
+                <tr>
+                    <td>罚单编号:</td><td><input type="text" name="id" style="width:200px" /></td>
+                </tr>
+                <tr>
+                    <td>客户邮箱:</td><td><input type="text" name="c_email" style="width:200px" /></td>
+                </tr>
+                <tr>
+<!--                    <td>罚单内容:</td><td><input type="text" name="message" style="width:200px"/></td>-->
+                    <td>罚单内容:</td>
+                    <td><textarea rows="7" cols="40" type="text" name="message"></textarea></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="submit" value="发送" name="deal"  onclick="return logout()"/>
+                        <input type="submit" value="查询" name="deal"/>
+                    </td>
+                    <td>
+                        <input type="reset" value="重置" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div id="show">
+        <table id="table">
+            <h3 th:utext="${Result}">操作结果</h3>
+            <tr th:each="ticketList:${ticketList}">
+                <th th:text="${ticketList.getId()}"></th>
+                <th th:text="${ticketList.getC_email()}"></th>
+                <th><a th:href="@{SelecttickerById(id=${ticketList.getId()})}">详情</a></th>
+            </tr>
+        </table>
+    </div>
+
+</div>
+<script>
+    function logout() {
+        if (window.confirm('确认发送?')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+
+</body>
+</html>

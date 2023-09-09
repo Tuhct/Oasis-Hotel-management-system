@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>雇员页面</title>
+    <link rel="stylesheet" type="text/css" href="CSS/CSS界面.css">
+</head>
+
+<body>
+<!--顶部信息区-->
+<header role="header">
+    <div>
+        <h1>酒店管理系统</h1>
+        <nav role="user">
+            <ul>
+                <li><h3>雇员</h3></li>
+                <li><a href="modify_pass.html" target="main">修改密码</a></li>
+                <li><a href="javascript:void(0);" onclick="logout()">退出登录</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<!--圣杯二列布局-->
+<main role="main">
+    <!--主体内联框架区-->
+    <article role="content">
+        <iframe src="welcome.html"  name="main"></iframe>
+        <footer role="copyright">
+
+        </footer>
+    </article>
+    <!--左侧导航区-->
+    <aside>
+        <nav role="option">
+            <ul>
+                <li>导航列表</li>
+                <li><a href="/scfd" target="main">生成罚单</a></li>
+                <li><a href="/scdd" target="main">生成订单</a></li>
+                <li><a href="/sctz" target="main">生成通知</a></li>
+                <li><a href="/mrrz" target="main">每日入住</a></li>
+                <li><a href="/mrdd" target="main">每日到达</a></li>
+                <li><a href="/ckyd" target="main">查看预定</a></li>
+            </ul>
+        </nav>
+    </aside>
+</main>
+</body>
+</html>
+<script>
+    function logout() {
+        if (window.confirm('是否退出?')) {
+            window.location.href = 'http://localhost:8080/index.html';
+        } else {
+            return false;
+        }
+    }
+</script>

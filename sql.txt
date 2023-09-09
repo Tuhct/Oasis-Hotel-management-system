@@ -1,0 +1,251 @@
+create database HotelSystem;
+use HotelSystem;
+#建立客户信息表
+create table client_information(
+client_id int(15) primary key not null,
+client_name char(20) not null,
+client_phone char(11) not null,
+email char(20),
+credit_card char(20) not null,
+index(email),
+index(client_name)
+);
+#建立员工信息表
+create table employees(
+employees_id int(15) primary key not null,
+employees_name char(20) not null,
+employees_phone char(11) not null,
+sex enum('男','女') not null,
+post char(20) not null
+);
+#建立房间信息表
+create table room(
+room_id int(15) primary key not null,
+room_type enum('套房','单人间','双人间') not null,
+price char(20) not null
+);
+#预定信息表
+create table booking(
+book_id int(15) primary key not null,
+c_id int(15) not null,
+book_type enum('提前90天','提前60天','正常预定','奖励预定') not null,
+occupancy datetime not null,
+depart datetime not null,
+price char(20) not null,
+index(book_type),
+index(occupancy),
+index(depart),
+foreign key(c_id) references client_information(client_id)
+);
+#通知表
+create table notice(
+id int(15) primary key not null,
+c_email char(20) not null,
+message char(255) not null,
+foreign key(c_email) references client_information(email)
+);
+#罚单表
+create table ticket(
+id int(15) primary key not null,
+c_email char(20) not null,
+message char(255) not null,
+foreign key(c_email) references client_information(email)
+);
+#基价表
+create table base_price(
+id int(15) primary key not null AUTO_INCREMENT,
+room_id int(15)not null,
+room_date datetime not null,
+price Decimal(10,2)
+);
+
+#预计入住报表
+create table report_in(
+id int(15) primary key not null AUTO_INCREMENT,
+report_date datetime not null,
+room_type enum('套房','单人间','双人间') not null,
+room_num int(15) not null,
+avg_occupancy char(20) not null
+);
+#预计收入报表
+create table report_revenue(
+id int(15) primary key not null AUTO_INCREMENT,
+report_date datetime not null,
+revenue_day char(20) not null,
+revenue_avg char(20) not null,
+revenue_all char(20) not null
+);
+#奖励报表
+create table reward(
+id int(15) primary key not null AUTO_INCREMENT,
+reward_date datetime not null,
+loss_day char(20) not null,
+loss_all char(20) not null,
+loss_avg char(20) not null
+);
+#每日到达报表
+create table arrive(
+-- id int(15) primary key not null AUTO_INCREMENT,
+client_name char(20) CHARACTER SET utf8mb4,
+room_id int(15) not null,
+arrive_date datetime not null,
+
+book_type enum('提前90天','提前60天','正常预定','奖励预定') not null,
+depart datetime not null,
+primary key(client_name,room_id,arrive_date)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+#每日入住表
+create table day_in(
+-- id int(15) primary key not null AUTO_INCREMENT,
+room_id int(15) primary key not null,
+client_name char(20) not null,
+
+depart datetime not null,
+foreign key(depart)references booking(depart),
+foreign key(client_name)references client_information(client_name)
+);
+use HotelSystem;
+#支付呢信息表
+create table pay(
+id int(15) primary key not null AUTO_INCREMENT,
+c_id int(15) not null,
+price char(20) not null,
+pay_date datetime not null,
+foreign key(c_id) references client_information(client_id)
+);
+-- *****************************************
+delimiter $$
+create trigger 到达即入住触发器_insert after insert on arrive for each row
+begin
+insert into day_in values(new.room_id,new.client_name,new.depart);
+end $$
+delimiter ;
+
+delimiter $$
+create trigger 到达即入住触发器_delete after delete on arrive for each row
+begin
+delete from day_in where
+room_id=old.room_id;
+end $$
+delimiter ;
+
+delimiter $$
+create trigger 基价即房间_update after update on base_price for each row
+begin
+update room
+set room.price=new.price
+where room.room_id=old.room_id;
+end $$
+delimiter ;
+
+-- drop trigger 基价即房间_insert;
+
+delimiter $$
+create trigger 预定即订单触发器_insert after insert on booking for each row
+begin
+insert into pay(c_id,price,pay_date)values(new.c_id,new.price,now());
+end $$
+delimiter ;
+
+delimiter $$
+create trigger 预定即订单触发器_update after update on booking for each row
+begin
+update pay
+set pay.price=new.price,
+pay.pay_date=now()
+where pay.c_id=old.c_id;
+end $$
+delimiter ;
+-- drop trigger 预定即订单触发器_insert;
+
+-- *****************************************
+insert into client_information values(1,"张三","18153885642","3439924101@qq.com",123456);
+insert into client_information values(2,"张四","18153885643","3439924102@qq.com",123457);
+insert into client_information values(3,"张五","18153885644","3439924103@qq.com",123458);
+insert into client_information values(4,"张六","18153885645","3439924104@qq.com",123459);
+insert into client_information values(5,"张七","18153885646","3439924105@qq.com",1234510);
+insert into client_information values(6,"张八","18153885647","3439924106@qq.com",1234511);
+insert into client_information values(7,"张九","18153885648","3439924107@qq.com",1234512);
+insert into client_information values(8,"李四","18153885649","3439924108@qq.com",1234513);
+insert into client_information values(9,"李五","18153885650","3439924109@qq.com",1234514);
+
+insert into room values(1,"套房","100");
+insert into room values(2,"单人间","130");
+insert into room values(3,"双人间","200");
+insert into room values(4,"套房","180");
+insert into room values(5,"套房","100");
+insert into room values(6,"单人间","110");
+insert into room values(7,"单人间","100");
+insert into room values(8,"套房","120");
+insert into room values(9,"套房","120");
+insert into room values(10,"双人间","100");
+insert into room values(11,"双人间","100");
+
+insert into base_price values(1,"1",now(),"100");
+insert into base_price values(2,"2",now(),"130");
+insert into base_price values(3,"3",now(),"200");
+insert into base_price values(4,"4",now(),"180");
+insert into base_price values(5,"5",now(),"100");
+insert into base_price values(6,"6",now(),"110");
+insert into base_price values(7,"7",now(),"100");
+insert into base_price values(8,"8",now(),"120");
+insert into base_price values(9,"9",now(),"120");
+insert into base_price values(10,"10",now(),"100");
+insert into base_price values(11,"11",now(),"100");
+
+insert into booking values(1,1,"提前60天","2022-12-18","2022-12-19","20");
+insert into booking values(2,2,"提前90天","2022-12-19","2022-12-20","20");
+insert into booking values(3,3,"提前60天","2022-12-18","2022-12-20","20");
+insert into booking values(4,4,"提前60天","2022-12-18","2022-12-19","20");
+insert into booking values(5,5,"正常预定","2022-12-18","2022-12-20","20");
+insert into booking values(6,6,"正常预定","2022-12-19","2022-12-21","20");
+insert into booking values(7,7,"奖励预定","2022-12-19","2022-12-20","20");
+insert into booking values(8,8,"奖励预定","2022-12-18","2022-12-20","20");
+
+insert into arrive values("张三",1,"2022-12-18","提前60天","2022-12-19");
+insert into arrive values("张四",2,"2022-12-19","提前90天","2022-12-20");
+insert into arrive values("张五",3,"2022-12-18","提前60天","2022-12-20");
+insert into arrive values("张六",4,"2022-12-18","提前60天","2022-12-19");
+insert into arrive values("张七",5,"2022-12-18","正常预定","2022-12-20");
+insert into arrive values("张八",6,"2022-12-19","正常预定","2022-12-21");
+insert into arrive values("张九",7,"2022-12-19","奖励预定","2022-12-20");
+insert into arrive values("李四",8,"2022-12-18","奖励预定","2022-12-20");
+
+insert into ticket values("1","3439924101@qq.com","您好，先检测到您有违反服务条例的行为,特开罚单于此，请点击下方二维码，支付30元");
+insert into ticket values("2","3439924101@qq.com","您好，先检测到您有违反服务条例的行为,特开罚单于此，请点击下方二维码，支付10元");
+insert into ticket values("3","3439924101@qq.com","您好，先检测到您有违反服务条例的行为,特开罚单于此，请点击下方二维码，支付20元");
+insert into ticket values("4","3439924101@qq.com","您好，先检测到您有违反服务条例的行为,特开罚单于此，请点击下方二维码，支付30元");
+insert into ticket values("5","3439924101@qq.com","您好，先检测到您有违反服务条例的行为,特开罚单于此，请点击下方二维码，支付15元");
+insert into ticket values("6","3439924101@qq.com","您好，先检测到您有违反服务条例的行为,特开罚单于此，请点击下方二维码，支付35元");
+insert into ticket values("7","3439924101@qq.com","您好，先检测到您有违反服务条例的行为,特开罚单于此，请点击下方二维码，支付45元");
+insert into ticket values("8","3439924101@qq.com","您好，先检测到您有违反服务条例的行为,特开罚单于此，请点击下方二维码，支付50元");
+insert into ticket values("9","3439924101@qq.com","您好，先检测到您有违反服务条例的行为,特开罚单于此，请点击下方二维码，支付30元");
+insert into ticket values("10","3439924101@qq.com","您好，先检测到您有违反服务条例的行为,特开罚单于此，请点击下方二维码，支付30元");
+
+insert into ticket values("11","3439924102@qq.com","您好，先检测到您有违反服务条例的行为,特开罚单于此，请点击下方二维码，支付30元");
+insert into ticket values("12","3439924103@qq.com","您好，先检测到您有违反服务条例的行为,特开罚单于此，请点击下方二维码，支付10元");
+insert into ticket values("13","3439924103@qq.com","您好，先检测到您有违反服务条例的行为,特开罚单于此，请点击下方二维码，支付20元");
+insert into ticket values("14","3439924102@qq.com","您好，先检测到您有违反服务条例的行为,特开罚单于此，请点击下方二维码，支付30元");
+insert into ticket values("15","3439924102@qq.com","您好，先检测到您有违反服务条例的行为,特开罚单于此，请点击下方二维码，支付15元");
+insert into ticket values("16","3439924104@qq.com","您好，先检测到您有违反服务条例的行为,特开罚单于此，请点击下方二维码，支付35元");
+insert into ticket values("17","3439924103@qq.com","您好，先检测到您有违反服务条例的行为,特开罚单于此，请点击下方二维码，支付45元");
+insert into ticket values("18","3439924102@qq.com","您好，先检测到您有违反服务条例的行为,特开罚单于此，请点击下方二维码，支付50元");
+
+insert into notice values("1","3439924101@qq.com","您好，今天是您入住前第45天，请点击下方二维码，完成支付，或者取消预定");
+insert into notice values("2","3439924103@qq.com","您好，今天是您入住前第45天，请点击下方二维码，完成支付，或者取消预定");
+insert into notice values("3","3439924101@qq.com","您好，今天是您入住前第45天，请点击下方二维码，完成支付，或者取消预定");
+insert into notice values("4","3439924102@qq.com","您好，今天是您入住前第45天，请点击下方二维码，完成支付，或者取消预定");
+insert into notice values("5","3439924101@qq.com","您好，今天是您入住前第45天，请点击下方二维码，完成支付，或者取消预定");
+insert into notice values("6","3439924104@qq.com","您好，今天是您入住前第45天，请点击下方二维码，完成支付，或者取消预定");
+insert into notice values("7","3439924103@qq.com","您好，今天是您入住前第45天，请点击下方二维码，完成支付，或者取消预定");
+insert into notice values("8","3439924102@qq.com","您好，今天是您入住前第45天，请点击下方二维码，完成支付，或者取消预定");
+
+
+INSERT INTO `hotelsystem`.`report_in` (`id`, `report_date`, `room_type`, `room_num`, `avg_occupancy`) VALUES ('1', '2001-10-10', '套房', '10', '90011001');
+INSERT INTO `hotelsystem`.`report_in` (`id`, `report_date`, `room_type`, `room_num`, `avg_occupancy`) VALUES ('2', '2020-10-10', '套房', '11', '90011002');
+
+INSERT INTO `hotelsystem`.`report_revenue` (`id`, `report_date`, `revenue_day`, `revenue_avg`, `revenue_all`) VALUES ('1', '2020-10-10', '2', '100', '1000');
+INSERT INTO `hotelsystem`.`report_revenue` (`id`, `report_date`, `revenue_day`, `revenue_avg`, `revenue_all`) VALUES ('2', '2022-10-11', '1', '100', '1100');
+
+INSERT INTO `hotelsystem`.`reward` (`id`, `reward_date`, `loss_day`, `loss_all`, `loss_avg`) VALUES ('1', '2022-10-10', '100', '10000', '1000');
+

@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="hotelsystem@localhost">
+  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.45">
+    <root id="1"/>
+    <schema id="2" parent="1" name="flower_info"/>
+    <schema id="3" parent="1" name="flower_sys"/>
+    <schema id="4" parent="1" name="hotelsystem">
+      <Current>1</Current>
+    </schema>
+    <schema id="5" parent="1" name="information_schema"/>
+    <schema id="6" parent="1" name="mrsoft"/>
+    <schema id="7" parent="1" name="mrsoft1"/>
+    <schema id="8" parent="1" name="mysql"/>
+    <schema id="9" parent="1" name="performance_schema"/>
+    <schema id="10" parent="1" name="student_system"/>
+    <schema id="11" parent="1" name="sys"/>
+    <table id="12" parent="4" name="arrive">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_unicode_ci</CollationName>
+    </table>
+    <table id="13" parent="4" name="base_price">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="14" parent="4" name="booking">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="15" parent="4" name="client_information">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="16" parent="4" name="day_in">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="17" parent="4" name="employees">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="18" parent="4" name="notice">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="19" parent="4" name="pay">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="20" parent="4" name="report_in">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="21" parent="4" name="report_revenue">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="22" parent="4" name="reward">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="23" parent="4" name="room">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <table id="24" parent="4" name="ticket">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <column id="25" parent="12" name="client_name">
+      <DasType>char(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </column>
+    <column id="26" parent="12" name="room_id">
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="27" parent="12" name="arrive_date">
+      <DasType>datetime|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="28" parent="12" name="book_type">
+      <DasType>enum(&apos;提前90天&apos;, &apos;提前60天&apos;, &apos;正常预定&apos;, &apos;奖励预定&apos;)|0e</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <column id="29" parent="12" name="depart">
+      <DasType>datetime|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+    </column>
+    <index id="30" parent="12" name="PRIMARY">
+      <ColNames>client_name
+room_id
+arrive_date</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="31" parent="12" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <trigger id="32" parent="12" name="到达即入住触发器_insert">
+      <Definer>root@localhost</Definer>
+      <Events>I</Events>
+      <SourceTextLength>76</SourceTextLength>
+      <Turn>after-row</Turn>
+    </trigger>
+    <trigger id="33" parent="12" name="到达即入住触发器_delete">
+      <Definer>root@localhost</Definer>
+      <Events>D</Events>
+      <SourceTextLength>55</SourceTextLength>
+      <Turn>after-row</Turn>
+    </trigger>
+    <column id="34" parent="13" name="id">
+      <AutoIncrement>11</AutoIncrement>
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="35" parent="13" name="room_id">
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="36" parent="13" name="room_date">
+      <DasType>datetime|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="37" parent="13" name="price">
+      <DasType>decimal(10,2 digit)|0s</DasType>
+      <Position>4</Position>
+    </column>
+    <index id="38" parent="13" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="39" parent="13" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <trigger id="40" parent="13" name="基价即房间_update">
+      <Definer>root@localhost</Definer>
+      <Events>U</Events>
+      <SourceTextLength>78</SourceTextLength>
+      <Turn>after-row</Turn>
+    </trigger>
+    <column id="41" parent="14" name="book_id">
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="42" parent="14" name="c_id">
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="43" parent="14" name="book_type">
+      <DasType>enum(&apos;提前90天&apos;, &apos;提前60天&apos;, &apos;正常预定&apos;, &apos;奖励预定&apos;)|0e</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="44" parent="14" name="occupancy">
+      <DasType>datetime|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <column id="45" parent="14" name="depart">
+      <DasType>datetime|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+    </column>
+    <column id="46" parent="14" name="price">
+      <DasType>char(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+    </column>
+    <foreign-key id="47" parent="14" name="booking_ibfk_1">
+      <ColNames>c_id</ColNames>
+      <RefColNames>client_id</RefColNames>
+      <RefTableName>client_information</RefTableName>
+    </foreign-key>
+    <index id="48" parent="14" name="PRIMARY">
+      <ColNames>book_id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="49" parent="14" name="c_id">
+      <ColNames>c_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="50" parent="14" name="book_type">
+      <ColNames>book_type</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="51" parent="14" name="occupancy">
+      <ColNames>occupancy</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="52" parent="14" name="depart">
+      <ColNames>depart</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="53" parent="14" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <trigger id="54" parent="14" name="预定即订单触发器_insert">
+      <Definer>root@localhost</Definer>
+      <Events>I</Events>
+      <SourceTextLength>79</SourceTextLength>
+      <Turn>after-row</Turn>
+    </trigger>
+    <trigger id="55" parent="14" name="预定即订单触发器_update">
+      <Definer>root@localhost</Definer>
+      <Events>U</Events>
+      <SourceTextLength>89</SourceTextLength>
+      <Turn>after-row</Turn>
+    </trigger>
+    <column id="56" parent="15" name="client_id">
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="57" parent="15" name="client_name">
+      <DasType>char(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="58" parent="15" name="client_phone">
+      <DasType>char(11)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="59" parent="15" name="email">
+      <DasType>char(20)|0s</DasType>
+      <Position>4</Position>
+    </column>
+    <column id="60" parent="15" name="credit_card">
+      <DasType>char(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+    </column>
+    <index id="61" parent="15" name="PRIMARY">
+      <ColNames>client_id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="62" parent="15" name="client_name">
+      <ColNames>client_name</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="63" parent="15" name="email">
+      <ColNames>email</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="64" parent="15" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="65" parent="16" name="room_id">
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="66" parent="16" name="client_name">
+      <DasType>char(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="67" parent="16" name="depart">
+      <DasType>datetime|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <foreign-key id="68" parent="16" name="day_in_ibfk_2">
+      <ColNames>client_name</ColNames>
+      <RefColNames>client_name</RefColNames>
+      <RefTableName>client_information</RefTableName>
+    </foreign-key>
+    <foreign-key id="69" parent="16" name="day_in_ibfk_1">
+      <ColNames>depart</ColNames>
+      <RefColNames>depart</RefColNames>
+      <RefTableName>booking</RefTableName>
+    </foreign-key>
+    <index id="70" parent="16" name="PRIMARY">
+      <ColNames>room_id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="71" parent="16" name="client_name">
+      <ColNames>client_name</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="72" parent="16" name="depart">
+      <ColNames>depart</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="73" parent="16" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="74" parent="17" name="employees_id">
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="75" parent="17" name="employees_name">
+      <DasType>char(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="76" parent="17" name="employees_phone">
+      <DasType>char(11)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="77" parent="17" name="sex">
+      <DasType>enum(&apos;男&apos;, &apos;女&apos;)|0e</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <column id="78" parent="17" name="post">
+      <DasType>char(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+    </column>
+    <index id="79" parent="17" name="PRIMARY">
+      <ColNames>employees_id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="80" parent="17" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="81" parent="18" name="id">
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="82" parent="18" name="c_email">
+      <DasType>char(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="83" parent="18" name="message">
+      <DasType>char(255)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <foreign-key id="84" parent="18" name="notice_ibfk_1">
+      <ColNames>c_email</ColNames>
+      <RefColNames>email</RefColNames>
+      <RefTableName>client_information</RefTableName>
+    </foreign-key>
+    <index id="85" parent="18" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="86" parent="18" name="c_email">
+      <ColNames>c_email</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="87" parent="18" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="88" parent="19" name="id">
+      <AutoIncrement>8</AutoIncrement>
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="89" parent="19" name="c_id">
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="90" parent="19" name="price">
+      <DasType>char(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="91" parent="19" name="pay_date">
+      <DasType>datetime|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <foreign-key id="92" parent="19" name="pay_ibfk_1">
+      <ColNames>c_id</ColNames>
+      <RefColNames>client_id</RefColNames>
+      <RefTableName>client_information</RefTableName>
+    </foreign-key>
+    <index id="93" parent="19" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="94" parent="19" name="c_id">
+      <ColNames>c_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="95" parent="19" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="96" parent="20" name="id">
+      <AutoIncrement>2</AutoIncrement>
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="97" parent="20" name="report_date">
+      <DasType>datetime|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="98" parent="20" name="room_type">
+      <DasType>enum(&apos;套房&apos;, &apos;单人间&apos;, &apos;双人间&apos;)|0e</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="99" parent="20" name="room_num">
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <column id="100" parent="20" name="avg_occupancy">
+      <DasType>char(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+    </column>
+    <index id="101" parent="20" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="102" parent="20" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="103" parent="21" name="id">
+      <AutoIncrement>2</AutoIncrement>
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="104" parent="21" name="report_date">
+      <DasType>datetime|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="105" parent="21" name="revenue_day">
+      <DasType>char(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="106" parent="21" name="revenue_avg">
+      <DasType>char(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <column id="107" parent="21" name="revenue_all">
+      <DasType>char(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+    </column>
+    <index id="108" parent="21" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="109" parent="21" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="110" parent="22" name="id">
+      <AutoIncrement>1</AutoIncrement>
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="111" parent="22" name="reward_date">
+      <DasType>datetime|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="112" parent="22" name="loss_day">
+      <DasType>char(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="113" parent="22" name="loss_all">
+      <DasType>char(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <column id="114" parent="22" name="loss_avg">
+      <DasType>char(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+    </column>
+    <index id="115" parent="22" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="116" parent="22" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="117" parent="23" name="room_id">
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="118" parent="23" name="room_type">
+      <DasType>enum(&apos;套房&apos;, &apos;单人间&apos;, &apos;双人间&apos;)|0e</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="119" parent="23" name="price">
+      <DasType>char(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <index id="120" parent="23" name="PRIMARY">
+      <ColNames>room_id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="121" parent="23" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="122" parent="24" name="id">
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="123" parent="24" name="c_email">
+      <DasType>char(20)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="124" parent="24" name="message">
+      <DasType>char(255)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <foreign-key id="125" parent="24" name="ticket_ibfk_1">
+      <ColNames>c_email</ColNames>
+      <RefColNames>email</RefColNames>
+      <RefTableName>client_information</RefTableName>
+    </foreign-key>
+    <index id="126" parent="24" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="127" parent="24" name="c_email">
+      <ColNames>c_email</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="128" parent="24" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+  </database-model>
+</dataSource>

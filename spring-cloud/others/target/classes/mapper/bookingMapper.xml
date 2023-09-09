@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springbootdemo.mapper.bookingMapper" >
+    <insert id="addbooking">
+        INSERT INTO booking values (#{book_id},#{c_id},#{book_type},#{depart},#{occupancy},#{price})
+    </insert>
+    <delete id="deletebooking">
+        delete from booking where book_id=#{book_id}
+    </delete>
+    <update id="updatebooking">
+        update booking
+        set
+        book_id=#{book_id},
+        c_id=#{c_id},
+        book_type=#{book_type},
+        depart=#{depart},
+        occupancy=#{occupancy},
+        price=#{price}
+        where book_id=#{book_id}
+    </update>
+    <select id="selectbooking" resultType="com.example.springbootdemo.bean.booking">
+        SELECT *
+        FROM booking
+        WHERE (book_id = #{book_id} OR #{book_id}= "")
+        AND (c_id = #{c_id} OR #{c_id}= "")
+        AND (book_type = #{book_type} OR #{book_type}= "")
+<!--        AND (depart = #{depart} OR #{depart}= "")-->
+<!--        AND (occupancy = #{occupancy} OR #{occupancy}= "")-->
+        AND (price = #{price}  OR #{price}= "")
+    </select>
+</mapper>

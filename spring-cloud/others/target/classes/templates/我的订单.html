@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>生成订单</title>
+    <link rel="stylesheet" type="text/css" href="CSS/CSS管理.css">
+</head>
+<body>
+
+<div id="main">
+    <div id="deal">
+        <p3>我的订单</p3>
+        <form method="post" action="wddd">
+            <table>
+                <tr style="display: none">
+                    <td>订单编号:</td><td><input type="text" name="id" style="width:200px" /></td>
+                </tr>
+                <tr>
+                    <td>客户编号:</td><td><input required="required" type="text" name="c_id" style="width:200px" /></td>
+                </tr>
+                <tr style="display: none">
+                    <td>价格:</td><td><input type="text" name="price" style="width:200px"/></td>
+                </tr>
+                <tr style="display: none">
+                    <td>支付日期:</td><td><input type="text" name="pay_date" style="width:200px"/></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="submit" value="查询" name="deal"/>
+                    </td>
+                    <td>
+                        <input type="reset" value="重置" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div id="show">
+        <table id="table">
+            <h3 th:utext="${Result}">操作结果</h3>
+            <tr th:each="payList:${payList}">
+                <th th:text="${payList.getId()}"></th>
+                <th th:text="${payList.getC_id()}"></th>
+                <th th:text="${payList.getPrice()}"></th>
+                <th th:text="${payList.getPay_date()}"></th>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+
+</body>
+</html>

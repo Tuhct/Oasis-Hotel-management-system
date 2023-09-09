@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>预定</title>
+    <link rel="stylesheet" type="text/css" href="CSS/CSS管理.css">
+</head>
+<body>
+
+<div id="main">
+    <div id="deal">
+        <p3>预定</p3>
+        <form method="post" action="yuding1">
+            <table>
+                <tr>
+                    <td>预定编号:</td><td><input type="text" name="book_id" style="width:200px" /></td>
+                </tr>
+                <tr>
+                    <td>客户编号:</td><td><input type="text" name="c_id" style="width:200px"/></td>
+                </tr>
+                <tr>
+                    <td>预定类型:</td><td><input type="text" name="book_type" style="width:200px"/></td>
+                </tr>
+                <tr>
+                    <td>居住时间:</td><td><input type="text" name="depart" style="width:200px"/></td>
+                </tr>
+                <tr>
+                    <td>离开日期:</td><td><input type="text" name="occupancy" style="width:200px"/></td>
+                </tr>
+                <tr>
+                    <td>支付金额:</td><td><input type="text" name="price" style="width:200px"/></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="预定" name="deal"/>
+                        <input type="submit" value="取消预定" name="deal"/>
+                        <input type="submit" value="修改预定" name="deal"/>
+                    </td>
+                    <td>
+                        <input type="reset" value="重置" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div id="show">
+        <table id="table">
+            <h3 th:utext="${Result}">操作结果</h3>
+            <tr th:each="bookingList:${bookingList}">
+                <th th:text="${bookingList.getBook_id()}"></th>
+                <th th:text="${bookingList.getC_id()}"></th>
+                <th th:text="${bookingList.getBook_type()}"></th>
+                <th th:text="${bookingList.getDepart()}"></th>
+                <th th:text="${bookingList.getOccupancy()}"></th>
+                <th th:text="${bookingList.getPrice()}"></th>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+
+</body>
+</html>

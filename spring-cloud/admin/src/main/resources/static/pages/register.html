@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>超市物流管理系统注册</title>
+    <link rel="stylesheet" href="../plugins/element-ui/lib/theme-chalk/index.css">
+</head>
+<body>
+<div id="app">
+    <h1 align="center">注册新用户</h1>
+    <div style="margin: 20px;"></div>
+    <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
+        <el-form-item label="账户">
+            <el-input v-model="formLabelAlign.owner_account"></el-input>
+        </el-form-item>
+        <el-form-item label="密码">
+            <el-input v-model="formLabelAlign.owner_password"></el-input>
+        </el-form-item>
+        <el-form-item label="电话号码">
+            <el-input v-model="formLabelAlign.owner_phone"></el-input>
+        </el-form-item>
+        <el-form-item label="昵称">
+            <el-input v-model="formLabelAlign.owner_name"></el-input>
+        </el-form-item>
+    </el-form>
+    <el-row>
+        <el-button type="success" @click="myDone()">确定</el-button>
+        <el-button type="primary" @click="goBack()">返回</el-button>
+    </el-row>
+</div>
+
+
+<script src="../js/vue.js"></script>
+<script src="../plugins/element-ui/lib/index.js"></script>
+<script src="../js/axios-0.18.0.js"></script>
+
+<script>
+    new Vue({ // 配置对象 options
+        // 配置选项(option)
+        el: '#app',  // element: 指定用vue来管理页面中的哪个标签区域
+        data() {
+            return {
+                labelPosition: 'right',
+                formLabelAlign: {
+                    owner_account: '',
+                    owner_password: '',
+                    owner_name: '',
+                    owner_phone: ''
+                }
+            };
+        },
+        methods: {
+            myDone() {
+                axios.post("/account", this.formLabelAlign).then((res) => {
+                    //如果操作成功，关闭弹层，显示数据
+                    if(res.data.code == 20011){
+                        window.location.href="../index.html";
+                    }else if(res.data.code == 20010){
+                        this.$message.error("添加失败");
+                    }else{
+                        this.$message.error(res.data.msg);
+                    }
+                }).finally(() => {
+
+                });
+            },
+            goBack(){
+                window.location.href="../index.html";
+            }
+        }
+
+    })
+</script>
+</body>
+</html>

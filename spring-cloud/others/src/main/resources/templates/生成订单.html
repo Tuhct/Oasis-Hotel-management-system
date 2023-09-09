@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>生成订单</title>
+    <link rel="stylesheet" type="text/css" href="CSS/CSS管理.css">
+</head>
+<body>
+
+<div id="main">
+    <div id="deal">
+        <form method="post" action="scdd">
+            <table>
+                <tr>
+                    <td>订单编号:</td><td><input type="text" name="id" style="width:200px" /></td>
+                </tr>
+                <tr>
+                    <td>客户编号:</td><td><input type="text" name="c_id" style="width:200px" /></td>
+                </tr>
+                <tr>
+                    <td>价格:</td><td><input type="text" name="price" style="width:200px"/></td>
+                </tr>
+                <tr>
+                    <td>支付日期:</td><td><input type="text" name="pay_date" style="width:200px"/></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="submit" value="增加" name="deal" onclick="return logout()"/>
+                        <input type="submit" value="删除" name="deal" onclick="return logout1()"/>
+                        <input type="submit" value="修改" name="deal" onclick="return logout2()"/>
+                        <input type="submit" value="查询" name="deal"/>
+                    </td>
+                    <td>
+                        <input type="reset" value="重置" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div id="show">
+        <table id="table">
+            <h3 th:utext="${Result}">操作结果</h3>
+            <tr th:each="payList:${payList}">
+                <th th:text="${payList.getId()}"></th>
+                <th th:text="${payList.getC_id()}"></th>
+                <th th:text="${payList.getPrice()}"></th>
+                <th th:text="${payList.getPay_date()}"></th>
+            </tr>
+        </table>
+    </div>
+
+</div>
+<script>
+    function logout() {
+        if (window.confirm('确认增加?')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function logout1() {
+        if (window.confirm('确认删除?')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function logout2() {
+        if (window.confirm('确认修改?')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+
+</body>
+</html>

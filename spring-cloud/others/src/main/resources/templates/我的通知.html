@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>我的通知</title>
+    <link rel="stylesheet" type="text/css" href="CSS/CSS管理.css">
+</head>
+<body>
+
+<div id="main">
+    <div id="deal">
+        <p3>我的通知</p3>
+        <form method="post" action="wdtz">
+            <table>
+                <tr  style="display: none">
+                    <td>通知编号:</td><td><input type="text" name="id" style="width:200px" /></td>
+                </tr>
+                <tr>
+                    <td>客户邮箱:</td><td><input required="required" type="text" name="c_email" style="width:200px" /></td>
+                </tr>
+                <tr  style="display: none">
+                    <td>通知内容:</td>
+                    <td><textarea rows="7" cols="40" type="text" name="message"></textarea></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="submit" value="查询" name="deal"/>
+                    </td>
+                    <td>
+                        <input type="reset" value="重置" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div id="show">
+        <table id="table">
+            <h3 th:utext="${Result}">操作结果</h3>
+            <tr th:each="noticeList:${noticeList}">
+                <th th:text="${noticeList.getId()}"></th>
+                <th th:text="${noticeList.getC_email()}"></th>
+                <th><a th:href="@{SelecttickerById2(id=${noticeList.getId()})}">详情</a></th>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+
+</body>
+</html>
